@@ -19,6 +19,8 @@ Including another URLconf
 This file is the main URL router for the entire project. Starts search here and falls
 back to apps in case a pattern is not matched form here.
 '''
+from django.conf.urls.static import static
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 
@@ -27,3 +29,5 @@ urlpatterns = [
     path('', include('home.urls')),
     path('movies/', include('movies.urls')),
 ]
+
+urlpatterns.extend(static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
