@@ -1,21 +1,19 @@
 from django.shortcuts import render
-
-movies = [
-    {
-        'id': 1, 'name': 'Inception', 'price': 12, 'description': 'A mind-bending heist thriller.'
-    },
-    {
-        'id': 2, 'name': 'Avatar', 'price': 13, 'description': 'A journey to a distant world and a battle for resources.'
-    },
-    {
-        'id': 3, 'name': 'The Dark Knight', 'price': 14, 'description': 'Gotham\'s vigilante faces the Joker.'
-    },
-    {
-        'id': 4, 'name': 'Titanic', 'price': 11, 'description': 'A love story set against the backdrop of the sinking Titanic.'
-    },
-]
+from .models import Movie
 
 def index(request):
+    """Displays catalog of all movies, or displays search results for `search=*`."""
+
+    # Get value of request param `search` or falsey-value if key is not present in URL query.
+    search_term = request.GET.get('search')
+
+    # Find movies desired based on query.
+    if search_term:
+        movies = Movie.objects.filter(name__icontains=search_term)
+    else:
+        movies = Movie.objects.all()
+
+    # Render a response to the client.
     template_data = {
         'title': 'Movies',
         'movies': movies,
@@ -25,9 +23,9 @@ def index(request):
     })
 
 def show(request, id):
-    movie = movies[id - 1]
+    movie = Movie.objects.get(id=id)
     template_data = {
-        'title': movie['name'],
+        'title': movie.name,
         'movie': movie
     }
     return render(request, 'movies/show.html', {
