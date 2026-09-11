@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from .models import Movie
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
+from .models import Movie, Review
 
 def index(request):
     """Displays catalog of all movies, or displays search results for `search=*`."""
@@ -23,11 +24,57 @@ def index(request):
     })
 
 def show(request, id):
+    """Displays the page for a single movie, including description, price, image, and reviews."""
     movie = Movie.objects.get(id=id)
+    reviews = Review.objects.filter(movie=movie)
+
     template_data = {
         'title': movie.name,
-        'movie': movie
+        'movie': movie,
+        'reviews': reviews,
     }
     return render(request, 'movies/show.html', {
         'template_data': template_data
     })
+
+@login_required
+def create_review(request, id):
+    """Handle post request to create comment (`models.Review`) for Movie with ID `id`"""
+    if request.method == 'POST' and request.POST['comment'] != '':
+        movie = Movie.objects.get(id=id)
+        review = Review()
+        review.comment = request.POST['comment']
+        review.movie = movie
+        review.user = request.user
+        review.save()
+        return redirect('movies.show', id)
+    else:
+        return redirect('movies.show', id)
+
+@login_required
+def edit_review(request, id, review_id):
+    """Takes a movie ID, a review ID, and an updated comment to change review[id].comment to."""
+    review = get_object_or_404(Review, id=review_id)
+    if request.user != review.user:
+        return redirect('movies.show', id=id)
+    if request.method == 'GET':
+        template_data = {
+            'title': 'Edit Review',
+            'review': review,
+        }
+        return render(request, 'movies/edit_review.html', {
+            'template_data': template_data
+        })
+    elif request.method == 'POST' and request.POST['comment'] != '':
+        review.comment = request.POST['comment']
+        review.save()
+        return redirect('movies.show', id=id)
+    else:
+        return redirect('movies.show', id=id)
+
+@login_required
+def delete_review(request, id, review_id):
+    """Takes a movie ID and review ID to delete a review for movie."""
+    review = get_object_or_404(Review, id=review_id, user=request.user)
+    review.delete()
+    return redirect('movies.show', id=id)
