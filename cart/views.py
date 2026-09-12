@@ -1,5 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from movies.models import Movie
+
+from .models import Item, Order
 from .utils import calculate_cart_total
 
 def index(request):
@@ -25,6 +28,38 @@ def clear(request):
     """Removes all items from cart for request.session."""
     request.session['cart'] = {}
     return redirect('cart.index')
+
+@login_required
+def purchase(request):
+    """Creates Order and Item(s) with all movies in request.session['cart']."""
+    cart = request.session.get('cart', {})
+    movie_ids = cart.keys()
+    if not movie_ids:
+        return redirect('cart.index')
+    movies = Movie.objects.filter(id__in=movie_ids)
+    cart_total = calculate_cart_total(cart, movies)
+
+    order = Order()
+    order.user = request.user
+    order.total = cart_total
+    order.save()
+
+    for movie in movies:
+        item = Item()
+        item.price = movie.price
+        item.quantity = cart[str(movie.id)]
+        item.movie = movie
+        item.order = order
+        item.save()
+
+    request.session['cart'] = {}
+    template_data = {
+        'title': 'Purchase Confirmation',
+        'order_id': order.id,
+    }
+    return render(request, 'cart/purchase.html', {
+        'template_data': template_data
+    })
 
 def add(request, id):
     """Adds movie corresponding to ID to session['cart']."""

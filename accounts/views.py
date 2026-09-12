@@ -44,3 +44,13 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('home.index')
+
+@login_required
+def orders(request):
+    template_data = {
+        'title': 'Orders',
+        'orders': request.user.order_set.all(),
+    }
+    return render(request, 'accounts/orders.html', {
+        'template_data': template_data,
+    })

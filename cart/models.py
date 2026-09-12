@@ -10,7 +10,7 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(id) + ' - ' + self.user.username
+        return str(self.id) + ' - ' + self.user.username
 
 class Item(models.Model):
     """Represents an item for a given order."""
