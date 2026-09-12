@@ -39,7 +39,7 @@
                     {% for review in template_data.reviews %}
                     <li class="list-group-item pb-3 pt-3">
                         <h5 class="card-title">
-                            Review by {{ review.user.name }}
+                            Review by {{ review.user.username }}
                         </h5>
                         <h6 class="card-subtitle mb-2 text-muted">
                             {{ review.date }}
@@ -47,6 +47,12 @@
                         <p class="card-text">
                             {{ review.comment }}
                         </p>
+
+                        {% if user.is_authenticated and user != review.user %}
+                        <a class="btn btn-primary" href="{% url 'movies.report_review' id=template_data.movie.id review_id=review.id %}">
+                            Report
+                        </a>
+                        {% endif %}
 
                         {% if user.is_authenticated and user == review.user %}
                         <a class="btn btn-primary" href="{% url 'movies.edit_review' id=template_data.movie.id review_id=review.id %}">

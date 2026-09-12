@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Movie, Review
+from .models import Movie, Report, Review
 
 def index(request):
     """Displays catalog of all movies, or displays search results for `search=*`."""
@@ -27,6 +27,11 @@ def show(request, id):
     """Displays the page for a single movie, including description, price, image, and reviews."""
     movie = Movie.objects.get(id=id)
     reviews = Review.objects.filter(movie=movie)
+
+    # Fetch all reported reviews for this specific movie.
+    reported_review_ids = set([report.review.id for report in Report.objects.filter(movie=movie)])
+    # Remove all reviews that have been reported.
+    reviews = [review for review in reviews if review.id not in reported_review_ids]
 
     template_data = {
         'title': movie.name,
@@ -77,4 +82,16 @@ def delete_review(request, id, review_id):
     """Takes a movie ID and review ID to delete a review for movie."""
     review = get_object_or_404(Review, id=review_id, user=request.user)
     review.delete()
+    return redirect('movies.show', id=id)
+
+@login_required
+def report_review(request, id, review_id):
+    review = get_object_or_404(Review, id=review_id)
+
+    report = Report()
+    report.movie = review.movie
+    report.review = review
+    report.reportee = review.user
+    report.reporter = request.user
+    report.save()
     return redirect('movies.show', id=id)

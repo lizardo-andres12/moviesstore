@@ -27,3 +27,17 @@ class Review(models.Model):
 
     def __str__(self):
         return str(self.id) + ' - ' + self.movie.name
+
+class Report(models.Model):
+    """
+    Represents a review report. This should NOT cascading delete because
+    admins want to keep a consistent history for all abuse on our site.
+    """
+    id = models.AutoField(primary_key=True)
+    movie = models.ForeignKey(Movie, on_delete=models.DO_NOTHING)
+    review = models.ForeignKey(Review, on_delete=models.DO_NOTHING)
+    reporter = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='reporter_user')
+    reportee = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='reportee_user')
+
+    def __str__(self):
+        return f'{self.id} - {self.reporter.username}|{self.movie.name}'
