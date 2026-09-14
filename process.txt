@@ -1,0 +1,18 @@
+I apologize for the bad audio and video for the first three links, and the length of the videos. I also would like to apologize for not recording said videos correctly on teams, I used OBS Studio with overlays to capture my logbook. I will not do this again in the future.
+
+P.S. I live with 3 other people who can be pretty loud. I tried to trim out all the parts of the video where it was an issue.
+
+Link 1: Environment setup, project scaffolding, and HTML template writing. Ended on chapter 3 base.html implementation.
+https://gtvault-my.sharepoint.com/:v:/g/personal/lah8_gatech_edu/IQAgbxJlIBCMSoYsikHPSq3fARzC0EChI-fDyVyr6Lo3nxg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=m71MgH
+
+Link 2: Chapters 3-7. Did not switch to MySQL as per Dr. Feijoo-Garcia's Ed post. Apologies for any noise roommates made.
+https://gtvault-my.sharepoint.com/:v:/g/personal/lah8_gatech_edu/IQCehb5r5brmQpGeOKqSowGoAaUsSPwxtgs2XElkXIEGZTI?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=d7bJ4M
+
+Link 3: Chapters 8-12. Completed all user stories covered by textbook as of this video.
+https://gtvault-my.sharepoint.com/:v:/g/personal/lah8_gatech_edu/IQDyOzfJIWbLQ4a2Uxr4GSAqASJemPJSrHCPO219t_ZetSw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=RF5Fxo
+
+Link 4: Final user story reporting feature.
+https://gtvault-my.sharepoint.com/:v:/g/personal/lah8_gatech_edu/IQA1PqnlsXspQ7_HeAnYU53iAeheLTw0uHjWriD_z5HNLDE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=aDSL3a
+
+Link 5: Deploying to cloud.
+https://gtvault-my.sharepoint.com/:v:/g/personal/lah8_gatech_edu/IQBctfA9bdzPSq6X5aHRMv8CAdWIU_H22mpoGZrGUocoZn0?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=BW80Td
